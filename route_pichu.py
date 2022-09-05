@@ -51,7 +51,7 @@ if __name__ == "__main__":
         house_map=parse_map(sys.argv[1])
         x = moves(house_map,2,0)
         print(x)
-        # print("Shhhh... quiet while I navigate!")
+        print("Shhhh... quiet while I navigate!")
         # solution = search(house_map)
         # print("Here's the solution I found:")
         # print(str(solution[0]) + " " + solution[1])
