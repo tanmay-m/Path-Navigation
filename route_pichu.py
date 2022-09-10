@@ -2,11 +2,19 @@
 #
 # route_pichu.py : a maze solver
 #
-# Submitted by : [PUT YOUR NAME AND USERNAME HERE]
+# Submitted by : [NAME:TANMAY GIRISH MAHINDRAKAR USERNAME:TMAHIND]
 #
 # Based on skeleton code provided in CSCI B551, Fall 2022.
 
 import sys
+
+class pichu_cell:
+        def __init__(self,x_loc,y_loc,move_count,move_string):
+                self.x_loc = x_loc
+                self.y_loc = y_loc
+                self.move_count = move_count
+                self.move_string = move_string
+
 
 # Parse the map from a given filename
 def parse_map(filename):
@@ -35,24 +43,76 @@ def moves(map, row, col):
 
 def search(house_map):
         # Find pichu start position
-        pichu_loc=[(row_i,col_i) for col_i in range(len(house_map[0])) for row_i in range(len(house_map)) if house_map[row_i][col_i]=="p"][0]
-        fringe=[(pichu_loc,0)]
+        pichu_loc = [(row_i,col_i) for col_i in range(len(house_map[0])) for row_i in range(len(house_map)) if house_map[row_i][col_i]=="p"][0]
+        #print(pichu_loc)
 
-        while fringe:
-                (curr_move, curr_dist)=fringe.pop()
-                for move in moves(house_map, *curr_move):
-                        if house_map[move[0]][move[1]]=="@":
-                                return (7, 'DDDDDDD')  # return a dummy answer
-                        else:
-                                fringe.append((move, curr_dist + 1))
+        visited = [[False for i in range(len(house_map[0]))] for j in range(len(house_map))]
+        
+        pichu_queue = []
+        #print(pichu_loc[0])
+        #print(pichu_loc[1])
+        pichu_posi = pichu_cell(pichu_loc[0],pichu_loc[1],0,'')
+
+        pichu_queue.append(pichu_posi)
+        visited[pichu_posi.x_loc][pichu_posi.y_loc] = True
+
+        while(len(pichu_queue)!=0):
+                pichu_posi = pichu_queue.pop(0)
+
+                if house_map[pichu_posi.x_loc][pichu_posi.y_loc] == '@':
+                        return pichu_posi
+                
+                if (pichu_posi.x_loc - 1,pichu_posi.y_loc) in  moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc) and visited[pichu_posi.x_loc - 1][pichu_posi.y_loc] != True:
+                        pichu_queue.append(pichu_cell(pichu_posi.x_loc - 1,pichu_posi.y_loc, pichu_posi.move_count + 1, pichu_posi.move_string + 'U'))
+                        visited[pichu_posi.x_loc - 1][pichu_posi.y_loc] = True
+                        # print("moving UP")
+
+                if (pichu_posi.x_loc + 1,pichu_posi.y_loc) in  moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc) and visited[pichu_posi.x_loc + 1][pichu_posi.y_loc] != True:
+                        pichu_queue.append(pichu_cell(pichu_posi.x_loc + 1,pichu_posi.y_loc, pichu_posi.move_count + 1, pichu_posi.move_string + 'D'))
+                        visited[pichu_posi.x_loc + 1][pichu_posi.y_loc] = True
+                        # print("moving DOWN")
+
+                if (pichu_posi.x_loc,pichu_posi.y_loc - 1) in  moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc) and visited[pichu_posi.x_loc][pichu_posi.y_loc - 1] != True:
+                        pichu_queue.append(pichu_cell(pichu_posi.x_loc,pichu_posi.y_loc - 1, pichu_posi.move_count + 1, pichu_posi.move_string + 'L'))
+                        visited[pichu_posi.x_loc][pichu_posi.y_loc - 1] = True
+                        # print("moving LEFT")
+
+                if (pichu_posi.x_loc,pichu_posi.y_loc + 1) in  moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc) and visited[pichu_posi.x_loc][pichu_posi.y_loc + 1] != True:
+                        pichu_queue.append(pichu_cell(pichu_posi.x_loc,pichu_posi.y_loc + 1, pichu_posi.move_count + 1, pichu_posi.move_string + 'R'))
+                        visited[pichu_posi.x_loc][pichu_posi.y_loc + 1] = True
+                        # print("moving RIGHT")
+
+                
+
+                # print(list(moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc)))
+
+                # print(type(moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc)))
+                # print(type(([pichu_posi.x_loc - 1,pichu_posi.y_loc])))
+                # print((pichu_posi.x_loc - 1,pichu_posi.y_loc) in  moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc))
+                
+                # print(visited)
+
+                # print((4,0) in moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc))
+
+
+        return -1
+                
+
+
+
 
 # Main Function
 if __name__ == "__main__":
         house_map=parse_map(sys.argv[1])
-        x = moves(house_map,2,0)
-        print(x)
         print("Shhhh... quiet while I navigate!")
+        # visited1 = [[False for _ in range(len(grid[0]))]
+        #        for _ in range(len(grid))]
+        
+        a = search(house_map)
+        
         # solution = search(house_map)
-        # print("Here's the solution I found:")
+        print("Here's the solution I found:")
+        print(a.move_count,a.move_string)
+
         # print(str(solution[0]) + " " + solution[1])
 
