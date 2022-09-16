@@ -60,7 +60,7 @@ def search(house_map):
                 pichu_posi = pichu_queue.pop(0)
 
                 if house_map[pichu_posi.x_loc][pichu_posi.y_loc] == '@':
-                        return pichu_posi
+                        return (pichu_posi.move_count, pichu_posi.move_string)
                 
                 if (pichu_posi.x_loc - 1,pichu_posi.y_loc) in  moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc) and visited[pichu_posi.x_loc - 1][pichu_posi.y_loc] != True:
                         pichu_queue.append(pichu_cell(pichu_posi.x_loc - 1,pichu_posi.y_loc, pichu_posi.move_count + 1, pichu_posi.move_string + 'U'))
@@ -95,7 +95,7 @@ def search(house_map):
                 # print((4,0) in moves(house_map,pichu_posi.x_loc,pichu_posi.y_loc))
 
 
-        return -1
+        return (-1,"")
                 
 
 
@@ -108,11 +108,11 @@ if __name__ == "__main__":
         # visited1 = [[False for _ in range(len(grid[0]))]
         #        for _ in range(len(grid))]
         
-        a = search(house_map)
+        ans = search(house_map)
         
         # solution = search(house_map)
         print("Here's the solution I found:")
-        print(a.move_count,a.move_string)
+        print(str(ans[0])+" "+ans[1])
 
         # print(str(solution[0]) + " " + solution[1])
 
