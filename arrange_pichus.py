@@ -144,8 +144,9 @@ def isSafe(initial_house_map,row,col):
 
 def solve(initial_house_map,k):
     
-    # result = []
 
+    # THIS IS THE CODE FOR MULTIPLE RESULTS 
+    # result = []
     # # first pichu initialization
     # pichu_loc = [(row_i,col_i) for col_i in range(len(initial_house_map[0])) for row_i in range(len(initial_house_map)) if initial_house_map[row_i][col_i]=="p"][0]    #initial pichu loc
     # col.add(pichu_loc[1])
@@ -184,8 +185,6 @@ def solve(initial_house_map,k):
     #             # print("Value of row is",r)
     #             # print("Value of col is",c)
     #             # print("Inside this loop")
-    #             #print(col,diag_pos,diag_neg)
-    #             #print("Success",r,c)
     #             continue
     #         new_house_map[r][c] = 'p'
             
@@ -216,9 +215,6 @@ def solve(initial_house_map,k):
 
 
 
-
-import time
-
 # Main Function
 if __name__ == "__main__":
     house_map=parse_map(sys.argv[1])
@@ -229,10 +225,7 @@ if __name__ == "__main__":
             ['X','X','X','X'],
             ['X','p','X','X']]
     k = int(sys.argv[2])
-    start = time.time()
     solution = solve(house_map,k)
-    end = time.time()
-    print(start - end)
     # a = isSafe(grid,2,1)
     #print(printable_house_map(ans[0]))
     # print(ans)
