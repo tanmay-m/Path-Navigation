@@ -27,6 +27,9 @@ The goal state definition is the state in which the pichu has travelled and reac
 ### Initial State:
 The initial state is the grid with pichu in its starting location, with multiple or no obstacles denoted as 'X' with the destination cell marked with '@'.
 
+### Cost Function:
+The cost function can be defined as total paths covered to reach the goal state. In this case, we can measure the cost function by distance of traversals or the summation of number of times we have moved from one state to the other. 
+
 
 
 ## Elements of AI Assignment 01 (Problem 02 -  Hide and Seek):
