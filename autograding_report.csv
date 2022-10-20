@@ -1,0 +1,27 @@
+section,residential
+teamname,tmahind
+commit used,873d93f740723d19cd40b2584cee9e4fce10cbbc
+commit date,2022-09-16 23:45:43
+test_question1_case1_points,10
+test_question1_case1_status,passed
+test_question1_case2_points,10
+test_question1_case2_status,passed
+test_question1_case3_points,10
+test_question1_case3_status,passed
+test_question1_case4_points,10
+test_question1_case4_status,passed
+test_question1_case5_points,10
+test_question1_case5_status,passed
+test_question2_case1_points,10
+test_question2_case1_status,passed
+test_question2_case2_points,10
+test_question2_case2_status,passed
+test_question2_case3_points,10
+test_question2_case3_status,passed
+test_question2_case4_points,10
+test_question2_case4_status,passed
+test_question2_case5_points,10
+test_question2_case5_status,passed
+Total,100
+Late Penalty,0
+Total Autograding,100
